@@ -1,0 +1,73 @@
+[System]
+Name='Wb'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=27
+AndMethod='min'
+OrMethod='max'
+ImpMethod='prod'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Visits'
+Range=[0 30]
+NumMFs=3
+MF1='Low':'trapmf',[0 0 2 5]
+MF2='Med':'trapmf',[3 7 7 14]
+MF3='High':'trapmf',[7 14 30 30]
+
+[Input2]
+Name='MindExercise'
+Range=[0 120]
+NumMFs=3
+MF1='Low':'trapmf',[0 0 15 20]
+MF2='Med':'trapmf',[15 30 30 60]
+MF3='High':'trapmf',[30 60 120 120]
+
+[Input3]
+Name='FamilyInteractions'
+Range=[0 30]
+NumMFs=3
+MF1='Low':'trapmf',[0 0 2 5]
+MF2='Med':'trapmf',[3 7 7 14]
+MF3='High':'trapmf',[7 14 30 30]
+
+[Output1]
+Name='Colors'
+Range=[0 1]
+NumMFs=3
+MF1='Red':'trapmf',[0 0 0.2 0.4]
+MF2='Orange':'trapmf',[0.2 0.4 0.6 0.8]
+MF3='Blue':'trapmf',[0.586772486772487 0.786772486772487 0.986772486772487 0.986772486772487]
+
+[Rules]
+1 1 1, 1 (1) : 1
+1 1 2, 1 (1) : 1
+1 1 3, 2 (1) : 1
+1 2 1, 1 (1) : 1
+1 2 2, 1 (1) : 1
+1 2 3, 2 (1) : 1
+1 3 1, 1 (1) : 1
+1 3 2, 2 (1) : 1
+1 3 3, 3 (1) : 1
+2 1 1, 1 (1) : 1
+2 1 2, 1 (1) : 1
+2 1 3, 2 (1) : 1
+2 2 1, 1 (1) : 1
+2 2 2, 2 (1) : 1
+2 2 3, 2 (1) : 1
+2 3 1, 2 (1) : 1
+2 3 2, 3 (1) : 1
+2 3 3, 3 (1) : 1
+3 1 1, 2 (1) : 1
+3 1 2, 2 (1) : 1
+3 1 3, 2 (1) : 1
+3 2 1, 2 (1) : 1
+3 2 2, 3 (1) : 1
+3 2 3, 3 (1) : 1
+3 3 1, 2 (1) : 1
+3 3 2, 3 (1) : 1
+3 3 3, 3 (1) : 1

@@ -7,9 +7,9 @@
 * **MCGDM.py:** Class with the MCGDM algorithm
 * **Wellbeing.py:** Class with the variables and Membership Function for the variables
 monitored in Wellbeing
-* **5. Health.py:** Class with the variables and Membership Function for the variables
+* **Health.py:** Class with the variables and Membership Function for the variables
 monitored in Health
-* **6. grid.py:** File with which the grids for the final results is made
+* **grid.py:** File with which the grids for the final results is made
 
 ### Matlab files:
 * **Health.fis:** File with the Rule Set

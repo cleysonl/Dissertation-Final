@@ -29,7 +29,6 @@ class Wellbeing(object):
                      med_v.calculate_membership(self.num_visits),
                      high_v.calculate_membership(self.num_visits)]  
 
-        mv_visits =[float(i) for i in mv_visits]
 
         return mv_visits
 
@@ -46,7 +45,6 @@ class Wellbeing(object):
                             med_m_ex.calculate_membership(self.m_exercise),
                             high_m_ex.calculate_membership(self.m_exercise)]
 
-        mv_mind_exercise = [float(i) for i in mv_mind_exercise]   
 
         return mv_mind_exercise
 
@@ -64,7 +62,6 @@ class Wellbeing(object):
                        med_fam_int.calculate_membership(self.familyint),
                        high_fam_int.calculate_membership(self.familyint)]
         
-        mv_fam_int = [float(i) for i in mv_fam_int]
 
         return mv_fam_int
 

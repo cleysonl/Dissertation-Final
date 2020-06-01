@@ -13,10 +13,10 @@ from fuzzycreator import global_settings as gs
 
 class Health(object):
 
-    def __init__(self,med,press,b_temp):
+    def __init__(self,med,p_exercise,temp):
         self.med = med
-        self.press = press
-        self.b_temp = b_temp
+        self.p_exercise = p_exercise
+        self.temp = temp
     
     def medicine(self):
         """ MF for: % of times the patient has taken its medicine"""
@@ -33,37 +33,37 @@ class Health(object):
 
         return mv_medicine
 
-    def pressure(self):
+    def phys_exercise(self):
         """ MF for the physical exercise of the patient"""
         gs.global_uod = (0, 1)
 
-        mv_pressure = []    
+        mv_p_exercise = []    
 
-        low_p = FuzzySet(Trapezoidal(0,0,15/120,20/120))
-        med_p = FuzzySet(Trapezoidal(15/120,15/120,30/120,60/120))
-        high_p = FuzzySet(Trapezoidal(30/120,60/120,120/120,120/120))
+        low_p_exercise = FuzzySet(Trapezoidal(0,0,15/120,20/120))
+        med_p_exercise = FuzzySet(Trapezoidal(15/120,15/120,30/120,60/120))
+        high_p_exercise = FuzzySet(Trapezoidal(30/120,60/120,120/120,120/120))
 
-        mv_pressure = [low_p.calculate_membership(self.press),
-                       med_p.calculate_membership(self.press),
-                       high_p.calculate_membership(self.press)]
+        mv_p_exercise = [low_p_exercise.calculate_membership(self.p_exercise),
+                       med_p_exercise.calculate_membership(self.p_exercise),
+                       high_p_exercise.calculate_membership(self.p_exercise)]
 
-        return mv_pressure
+        return mv_p_exercise
 
-    def body_temp(self):
+    def ext_temp(self):
         """ MF for the exteriors temperature"""
         gs.global_uod = (0, 1)
-        mv_body_temp = []
+        mv_temp = []
         
-        low_btemp = FuzzySet(Trapezoidal(0,0,10/50,20/50))
-        med_btemp = FuzzySet(Trapezoidal(10/50,20/50,25/50,30/50))
-        high_btemp = FuzzySet(Trapezoidal(20/50,30/50,50/50,50/50))
+        low_temp = FuzzySet(Trapezoidal(0,0,10/50,20/50))
+        med_temp = FuzzySet(Trapezoidal(10/50,20/50,25/50,30/50))
+        high_temp = FuzzySet(Trapezoidal(20/50,30/50,50/50,50/50))
 
-        mv_body_temp = [low_btemp.calculate_membership(self.b_temp),
-                       med_btemp.calculate_membership(self.b_temp),
-                       high_btemp.calculate_membership(self.b_temp)]
+        mv_temp = [low_temp.calculate_membership(self.temp),
+                       med_temp.calculate_membership(self.temp),
+                       high_temp.calculate_membership(self.temp)]
 
-        return mv_body_temp
+        return mv_temp
 
     def mv_health(self):
-        table_health = pd.DataFrame([self.medicine(),self.pressure(),self.body_temp()], columns=["Low","Med","High"])
+        table_health = pd.DataFrame([self.medicine(),self.phys_exercise(),self.ext_temp()], columns=["Low","Med","High"])
         return table_health

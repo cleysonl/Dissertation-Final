@@ -11,10 +11,10 @@ from fuzzycreator import global_settings as gs
 
 class Wellbeing(object):
 
-    def __init__(self,num_visits,t_exercise,ext_temp):
+    def __init__(self, num_visits, m_exercise, familyint):
         self.num_visits = num_visits
-        self.t_exercise = t_exercise
-        self.ext_temp = ext_temp
+        self.m_exercise = m_exercise
+        self.familyint = familyint
     
     def visits(self):
         """ MF for pyhsical visits from family members or friends per week"""
@@ -27,39 +27,47 @@ class Wellbeing(object):
 
         mv_visits = [low_v.calculate_membership(self.num_visits),
                      med_v.calculate_membership(self.num_visits),
-                     high_v.calculate_membership(self.num_visits)]
+                     high_v.calculate_membership(self.num_visits)]  
+
+        mv_visits =[float(i) for i in mv_visits]
 
         return mv_visits
 
-    def exercise(self):
+    def mind_exercise(self):
         """ MF for daily time using mind games per week"""
         gs.global_uod = (0, 1)
-        mv_exercise = []
+        mv_mind_exercise = []
 
-        low_ex = FuzzySet(Trapezoidal(0,0,15/120,20/120))
-        med_ex = FuzzySet(Trapezoidal(15/120,15/120,30/120,60/120))
-        high_ex = FuzzySet(Trapezoidal(30/120,60/120,120/120,120/120))
+        low_m_ex = FuzzySet(Trapezoidal(0,0,15/120,20/120))
+        med_m_ex = FuzzySet(Trapezoidal(15/120,15/120,30/120,60/120))
+        high_m_ex = FuzzySet(Trapezoidal(30/120,60/120,120/120,120/120))
 
-        mv_exercise = [low_ex.calculate_membership(self.t_exercise),
-                       med_ex.calculate_membership(self.t_exercise),
-                       high_ex.calculate_membership(self.t_exercise)]
-        return mv_exercise
+        mv_mind_exercise = [low_m_ex.calculate_membership(self.m_exercise),
+                            med_m_ex.calculate_membership(self.m_exercise),
+                            high_m_ex.calculate_membership(self.m_exercise)]
 
-    def temperature(self):
+        mv_mind_exercise = [float(i) for i in mv_mind_exercise]   
+
+        return mv_mind_exercise
+
+    def family_int(self):
         """ MF for family interactions via the device and SM per week"""
         gs.global_uod = (0, 1)
         
-        mv_temp = []
+        mv_fam_int = []
         
-        low_temp = FuzzySet(Trapezoidal(0,0,2/30,5/30))
-        med_temp = FuzzySet(Trapezoidal(3/30,7/30,7/30,14/30))
-        high_temp = FuzzySet(Trapezoidal(7/30,14/30,30/30,30/30))
+        low_fam_int = FuzzySet(Trapezoidal(0,0,2/30,5/30))
+        med_fam_int = FuzzySet(Trapezoidal(3/30,7/30,7/30,14/30))
+        high_fam_int = FuzzySet(Trapezoidal(7/30,14/30,30/30,30/30))
 
-        mv_temp = [low_temp.calculate_membership(self.ext_temp),
-                       med_temp.calculate_membership(self.ext_temp),
-                       high_temp.calculate_membership(self.ext_temp)]
-        return mv_temp
+        mv_fam_int = [low_fam_int.calculate_membership(self.familyint),
+                       med_fam_int.calculate_membership(self.familyint),
+                       high_fam_int.calculate_membership(self.familyint)]
+        
+        mv_fam_int = [float(i) for i in mv_fam_int]
+
+        return mv_fam_int
 
     def mv_wellbeing(self):
-        table_wellbeing = pd.DataFrame([self.visits(),self.exercise(),self.temperature()], columns=["Low","Med","High"])
+        table_wellbeing = pd.DataFrame([self.visits(), self.mind_exercise(), self.family_int()], columns=["Low","Med","High"])
         return table_wellbeing
